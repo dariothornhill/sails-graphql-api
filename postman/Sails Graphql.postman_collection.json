@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "cf02734a-e5c4-4d5a-8f74-67a14183d04a",
+		"name": "Sails Graphql",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Author",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($input: AuthorInput!) {\r\n    addAuthor(data: $input) {\r\n        ... on Author {\r\n            name\r\n            country\r\n        }\r\n        ... on ErrorResponse {\r\n            errors {\r\n                code\r\n                message\r\n            }\r\n        }\r\n    }\r\n}",
+						"variables": "{\r\n    \"input\": \r\n\r\n    {\r\n            \"name\": \"J. K. Rowling\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1337/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1337",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($input: BookInput!) {\r\n    addBook(data: $input) {\r\n        ... on Book {\r\n            title\r\n            yearPublished\r\n            genre\r\n        }\r\n        ... on ErrorResponse {\r\n            errors {\r\n                code\r\n                message\r\n            }\r\n        }\r\n    }\r\n}",
+						"variables": "{\r\n    \"input\": \r\n\r\n    {\r\n            \"title\": \"Harry Potter and the Philosopher's Stone\",\r\n            \"yearPublished\": \"1998\",\r\n            \"genre\": \"FANTASY\",\r\n            \"authorId\": 1\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1337/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1337",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Book by Author Id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id: Int!) {\r\n    getBook(id: $id) {\r\n        ... on Book {\r\n            title\r\n            yearPublished\r\n            genre\r\n            author {\r\n                name\r\n            }\r\n        }\r\n        ... on ErrorResponse {\r\n            errors {\r\n                code\r\n                message\r\n            }\r\n        }\r\n    }\r\n}",
+						"variables": "{\r\n    \"id\": 1\r\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1337/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1337",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
