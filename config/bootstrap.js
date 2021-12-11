@@ -8,8 +8,9 @@
  * For more information on seeding your app with fake data, check out:
  * https://sailsjs.com/config/bootstrap
  */
-
-module.exports.bootstrap = async function() {
+const {graphqlHTTP} = require('express-graphql');
+const { schema } = require('../api/graphql/schemas/schema');
+module.exports.bootstrap = async function(done) {
 
   // By convention, this is a good place to set up fake data during development.
   //
@@ -26,5 +27,12 @@ module.exports.bootstrap = async function() {
   //   // etc.
   // ]);
   // ```
-
+  sails.hooks.http.app.use('/graphql',
+    graphqlHTTP((req, res) => ({
+      schema: schema,
+      context: { req },
+      graphiql: true
+    }))
+  );
+  done();
 };

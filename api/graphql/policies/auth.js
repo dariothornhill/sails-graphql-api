@@ -7,7 +7,7 @@
  *
  */
 
- const { checkPermission } = require('./permission');
+ const { checkPermission } = require('./permissions');
 
  module.exports = {
  _authenticate: async (context) => {
